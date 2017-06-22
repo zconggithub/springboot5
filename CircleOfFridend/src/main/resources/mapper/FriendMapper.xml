@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.CircleOfFridend.dao.FriendMapper" >
+  <resultMap id="BaseResultMap" type="com.CircleOfFridend.entity.Friend" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="ftel" property="ftel" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    
+    <result column="age" property="age" jdbcType="INTEGER" />
+     <result column="month_sal" property="monthSal" jdbcType="INTEGER" />
+      <result column="annual_bonus" property="annualBonus" jdbcType="INTEGER" />
+  </resultMap>
+
+  
+  <sql id="Base_Column_List" >
+    fid, tid, fname, ftel, sex, age, month_sal as monthSal, annual_bonus as annualBonus
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from friend
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from friend
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+ 
+
+  <insert id="insert" parameterType="com.CircleOfFridend.entity.Friend" >
+    insert into friend (fid, tid, fname, 
+      ftel, sex, age, month_sal, annual_bonus)
+    values (#{fid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{fname,jdbcType=VARCHAR}, 
+      #{ftel,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{monthSal,jdbcType=INTEGER},#{annualBonus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.CircleOfFridend.entity.Friend" >
+    insert into friend
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+      <if test="ftel != null" >
+        ftel,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+            <if test="age != null" >
+        age,
+      </if>
+            <if test="month_sal != null" >
+        monthSal,
+      </if>
+            <if test="annual_bonus != null" >
+        annualBonus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="ftel != null" >
+        #{ftel,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      	      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+            <if test="month_sal != null" >
+        #{monthSal,jdbcType=INTEGER},
+      		</if>   
+         <if test="annual_bonus != null" >
+        #{annualBonus,jdbcType=INTEGER}
+      	</if>
+    </trim>
+  </insert>
+  
+ 
+
+  <update id="updateByPrimaryKey" parameterType="com.CircleOfFridend.entity.Friend" >
+    update friend
+    set tid = #{tid,jdbcType=INTEGER},
+      fname = #{fname,jdbcType=VARCHAR},
+      ftel = #{ftel,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      month_sal = #{monthSal,jdbcType=INTEGER},
+      annual_bonus = #{annualBonus,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 根据条件动态查询 -->
+  <select id="searchByCondition" parameterType="com.CircleOfFridend.entity.SearchCondition" resultType="com.CircleOfFridend.entity.Friend">
+  	    select 
+    <include refid="Base_Column_List" />
+    from friend where 1=1
+    <if test="tid != null and tid != '' ">
+    	AND tid=#{tid,jdbcType=INTEGER}
+    </if>
+    <if test="startAge != null and startAge != '' ">
+    	AND age &gt;= #{startAge}
+    </if>
+        <if test="endAge != null and endAge != '' ">
+    	AND age &lt;= #{endAge}
+    </if>
+        <if test="starAnnualBonus != null and starAnnualBonus != '' ">
+    	AND annual_bonus &gt;= #{starAnnualBonus}
+    </if>
+        <if test="endAnnualBonus != null and endAnnualBonus != '' ">
+    	AND annual_bonus &lt;= #{endAnnualBonus}
+    </if>
+  
+  </select>
+  
+</mapper>

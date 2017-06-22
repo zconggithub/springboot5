@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+		
+		<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>springBootDemo实例BootStrap</title>
+<!--样式文件引用-->
+		<link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<script src="/js/jquery-3.2.1.min.js"></script>
+		<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" >
+function OnKey() {
+document.getElementById("t2").value = document.getElementById("t1").value;
+}
+</script>
+		</head>
+    <body>
+
+
+	<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h3>
+				h3. 这是一套可视化布局系统.
+			</h3>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+		</div>
+		<div class="span6">
+			<form class="form-horizontal">
+				<div class="control-group">
+					 <label class="control-label" for="inputEmail">邮箱</label>
+					<div class="controls">
+						<input id="inputEmail" type="text" />
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label" for="inputPassword">密码</label>
+					<div class="controls">
+						<input id="inputPassword" type="password" />
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						 <label class="checkbox"><input type="checkbox" /> Remember me</label> <button type="submit" class="btn">登陆</button>
+					</div>
+				</div>
+			</form>
+			<p><input id="en"  value="" onkeyup="document.getElementById('zn').value =this.value;"/></p>
+			<p><input id="zn" value="" /></p>
+		</div>
+	</div>
+</div>
+
+			<div>
+			<input id="t1" type="text" onkeyup="OnKey()" />
+			<input id="t2" type="text" />
+			
+			</div>
+    </body>
+</html>
